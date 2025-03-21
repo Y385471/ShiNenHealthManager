@@ -15,7 +15,7 @@ import Settings from "@/pages/settings/index";
 import Layout from "@/components/layout/Layout";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 
-function ProtectedRoute({ component: Component, ...rest }: { component: React.ComponentType, [key: string]: any }) {
+function AuthenticatedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
@@ -30,30 +30,38 @@ function ProtectedRoute({ component: Component, ...rest }: { component: React.Co
     return null;
   }
 
-  return <Component {...rest} />;
+  return <>{children}</>;
 }
 
 function Router() {
+  const { isAuthenticated } = useAuth();
+  const [location] = useLocation();
+  
+  // We need to know if we're on the login page to avoid showing Layout
+  const isLoginPage = location === "/login";
+  
+  // If not authenticated and not on login page, redirect will happen in AuthenticatedRoute
+  
+  if (isLoginPage) {
+    return <Login />;
+  }
+  
   return (
-    <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/">
-        <Layout>
-          <Switch>
-            <Route path="/" component={() => <ProtectedRoute component={Dashboard} />} />
-            <Route path="/patients" component={() => <ProtectedRoute component={Patients} />} />
-            <Route path="/appointments" component={() => <ProtectedRoute component={Appointments} />} />
-            <Route path="/inventory" component={() => <ProtectedRoute component={Inventory} />} />
-            <Route path="/finance" component={() => <ProtectedRoute component={Finance} />} />
-            <Route path="/whatsapp" component={() => <ProtectedRoute component={WhatsApp} />} />
-            <Route path="/reports" component={() => <ProtectedRoute component={Reports} />} />
-            <Route path="/settings" component={() => <ProtectedRoute component={Settings} />} />
-            {/* Fallback to 404 */}
-            <Route component={NotFound} />
-          </Switch>
-        </Layout>
-      </Route>
-    </Switch>
+    <Layout>
+      <AuthenticatedRoute>
+        <Switch>
+          <Route path="/" component={Dashboard} />
+          <Route path="/patients" component={Patients} />
+          <Route path="/appointments" component={Appointments} />
+          <Route path="/inventory" component={Inventory} />
+          <Route path="/finance" component={Finance} />
+          <Route path="/whatsapp" component={WhatsApp} />
+          <Route path="/reports" component={Reports} />
+          <Route path="/settings" component={Settings} />
+          <Route component={NotFound} />
+        </Switch>
+      </AuthenticatedRoute>
+    </Layout>
   );
 }
 

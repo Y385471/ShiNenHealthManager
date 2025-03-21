@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Progress } from "@/components/ui/progress";
+import { InventoryItem } from "@shared/schema";
 
 export default function InventoryAlerts() {
   const { data: lowStockItems, isLoading } = useQuery({
     queryKey: ["/api/inventory/low-stock"],
+    initialData: [] // Initialize with empty array to avoid type errors
   });
 
-  const calculateStockPercentage = (item: any) => {
+  const calculateStockPercentage = (item: InventoryItem) => {
     return Math.min(100, Math.round((item.quantity / item.minQuantity) * 100));
   };
 
@@ -23,13 +24,13 @@ export default function InventoryAlerts() {
           <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
           <p className="text-neutral-500">جاري تحميل البيانات...</p>
         </div>
-      ) : lowStockItems?.length === 0 ? (
+      ) : lowStockItems.length === 0 ? (
         <div className="p-8 text-center text-neutral-500">
           لا توجد مواد منخفضة المخزون
         </div>
       ) : (
         <div className="divide-y divide-neutral-200">
-          {lowStockItems?.map((item: any) => (
+          {lowStockItems.map((item: InventoryItem) => (
             <div key={item.id} className="p-4 hover:bg-neutral-50">
               <div className="flex items-center justify-between mb-2">
                 <div className="font-medium">{item.name}</div>
