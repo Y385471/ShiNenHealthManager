@@ -58,8 +58,8 @@ export default function InventoryAlerts() {
       )}
       
       <div className="p-3 border-t border-neutral-200 bg-neutral-50 text-center">
-        <Link href="/inventory">
-          <a className="text-primary text-sm hover:underline">إدارة المخزون</a>
+        <Link href="/inventory" className="text-primary text-sm hover:underline">
+          إدارة المخزون
         </Link>
       </div>
     </div>

@@ -122,10 +122,8 @@ export default function WhatsAppMessages() {
       )}
 
       <div className="p-3 border-t border-neutral-200 bg-neutral-50 text-center">
-        <Link href="/whatsapp">
-          <a className="text-primary text-sm hover:underline">
-            إدارة رسائل WhatsApp
-          </a>
+        <Link href="/whatsapp" className="text-primary text-sm hover:underline">
+          إدارة رسائل WhatsApp
         </Link>
       </div>
     </div>

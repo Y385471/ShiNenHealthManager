@@ -132,8 +132,8 @@ export default function PerformanceMetrics() {
       </div>
 
       <div className="p-3 border-t border-neutral-200 bg-neutral-50 text-center">
-        <Link href="/reports">
-          <a className="text-primary text-sm hover:underline">عرض التقرير الكامل</a>
+        <Link href="/reports" className="text-primary text-sm hover:underline">
+          عرض التقرير الكامل
         </Link>
       </div>
     </div>
