@@ -101,17 +101,14 @@ export default function Sidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsO
               key={link.path} 
               href={link.path}
               onClick={closeSidebarOnMobile}
+              className={`flex items-center gap-3 px-4 py-3 rounded-md ${
+                location === link.path
+                  ? "text-primary bg-blue-50"
+                  : "text-neutral-700 hover:bg-neutral-100"
+              }`}
             >
-              <a 
-                className={`flex items-center gap-3 px-4 py-3 rounded-md ${
-                  location === link.path
-                    ? "text-primary bg-blue-50"
-                    : "text-neutral-700 hover:bg-neutral-100"
-                }`}
-              >
-                {link.icon}
-                <span>{link.label}</span>
-              </a>
+              {link.icon}
+              <span>{link.label}</span>
             </Link>
           ))}
           

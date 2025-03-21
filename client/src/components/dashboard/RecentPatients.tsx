@@ -148,12 +148,12 @@ export default function RecentPatients() {
                       <div className="flex gap-2">
                         <Button variant="ghost" size="icon" asChild>
                           <Link href={`/patients/${patient.id}`}>
-                            <a><User className="h-4 w-4 text-primary" /></a>
+                            <User className="h-4 w-4 text-primary" />
                           </Link>
                         </Button>
                         <Button variant="ghost" size="icon" asChild>
                           <Link href={`/appointments/new?patientId=${patient.id}`}>
-                            <a><Calendar className="h-4 w-4 text-primary" /></a>
+                            <Calendar className="h-4 w-4 text-primary" />
                           </Link>
                         </Button>
                         <Button variant="ghost" size="icon">
@@ -170,8 +170,8 @@ export default function RecentPatients() {
       )}
 
       <div className="p-3 border-t border-neutral-200 bg-neutral-50 text-center">
-        <Link href="/patients">
-          <a className="text-primary text-sm hover:underline">عرض كل المرضى</a>
+        <Link href="/patients" className="text-primary text-sm hover:underline">
+          عرض كل المرضى
         </Link>
       </div>
     </div>
