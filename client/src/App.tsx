@@ -40,14 +40,14 @@ function Router() {
       <Route path="/">
         <Layout>
           <Switch>
-            <Route path="/" component={Dashboard} />
-            <Route path="/patients" component={Patients} />
-            <Route path="/appointments" component={Appointments} />
-            <Route path="/inventory" component={Inventory} />
-            <Route path="/finance" component={Finance} />
-            <Route path="/whatsapp" component={WhatsApp} />
-            <Route path="/reports" component={Reports} />
-            <Route path="/settings" component={Settings} />
+            <Route path="/" component={() => <ProtectedRoute component={Dashboard} />} />
+            <Route path="/patients" component={() => <ProtectedRoute component={Patients} />} />
+            <Route path="/appointments" component={() => <ProtectedRoute component={Appointments} />} />
+            <Route path="/inventory" component={() => <ProtectedRoute component={Inventory} />} />
+            <Route path="/finance" component={() => <ProtectedRoute component={Finance} />} />
+            <Route path="/whatsapp" component={() => <ProtectedRoute component={WhatsApp} />} />
+            <Route path="/reports" component={() => <ProtectedRoute component={Reports} />} />
+            <Route path="/settings" component={() => <ProtectedRoute component={Settings} />} />
             {/* Fallback to 404 */}
             <Route component={NotFound} />
           </Switch>

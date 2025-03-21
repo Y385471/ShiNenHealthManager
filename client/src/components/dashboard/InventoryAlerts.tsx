@@ -40,15 +40,16 @@ export default function InventoryAlerts() {
               <div className="text-sm text-neutral-600 mb-2">
                 المتبقي: {item.quantity} {item.unit} من أصل {item.minQuantity}
               </div>
-              <Progress 
-                value={calculateStockPercentage(item)} 
-                className="h-2 mb-2"
-                indicatorClassName={
-                  calculateStockPercentage(item) <= 30 
-                    ? "bg-status-danger" 
-                    : "bg-status-warning"
-                }
-              />
+              <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary mb-2">
+                <div
+                  className={`h-full w-full absolute left-0 top-0 ${
+                    calculateStockPercentage(item) <= 30 
+                      ? "bg-status-danger" 
+                      : "bg-status-warning"
+                  }`}
+                  style={{ width: `${calculateStockPercentage(item)}%` }}
+                />
+              </div>
               <Button variant="link" className="p-0 h-auto text-primary text-sm">
                 طلب إعادة توريد
               </Button>
